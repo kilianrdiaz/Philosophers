@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_args.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kroyo-di <kroyo-di@student.42barcelon      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/23 15:50:21 by kroyo-di          #+#    #+#             */
+/*   Updated: 2025/01/23 15:50:24 by kroyo-di         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/philosophers.h"
 
 void	print_valid_args(void)
@@ -23,7 +35,7 @@ void	check_args(int ac, char **av)
 		j = 0;
 		while (av[i][j])
 		{
-			if (!ft_isdigit(av[i][j]))	//TODO
+			if (!ft_isdigit(av[i][j]))
 				print_valid_args();
 			j++;
 		}
