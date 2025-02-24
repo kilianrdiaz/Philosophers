@@ -1,38 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kroyo-di <kroyo-di@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 15:57:01 by kroyo-di          #+#    #+#             */
-/*   Updated: 2025/02/24 18:16:51 by kroyo-di         ###   ########.fr       */
+/*   Created: 2025/02/24 15:31:22 by kroyo-di          #+#    #+#             */
+/*   Updated: 2025/02/24 18:16:47 by kroyo-di         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philosophers.h"
 
-void    start(t_table *table)
+void routine(void *arg)
 {
-    int i;
+	t_table table;
 
-    i = 0;
-    while (i < table->nphilos)
-    {
-        pthread_create(&table->philos[i++].thread, NULL, routine, table);
-    }
-}
+	table = (t_table *)arg;
+	while (1)
+	{
+		//Think
+		printf("");
+		//Eat
 
-int main(int ac, char **av)
-{
-    t_table table;
-    
-    if (ac == 5 || ac == 6)
-    {
-        check_args();
-        init_table(&table, av, ac);
-        start(&table);
-    }
-    else
-        print_valid_args();
+		//Sleep
+
+		//Repeat
+	}
 }

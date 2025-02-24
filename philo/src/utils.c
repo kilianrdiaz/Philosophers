@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kroyo-di <kroyo-di@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: kroyo-di <kroyo-di@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:39:32 by kroyo-di          #+#    #+#             */
-/*   Updated: 2025/01/24 17:31:16 by kroyo-di         ###   ########.fr       */
+/*   Updated: 2025/02/24 18:16:51 by kroyo-di         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philosophers.h"
+
+long	get_time_ms(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000L) + (tv.tv_usec / 1000));
+}
 
 int	ft_isdigit(char c)
 {
