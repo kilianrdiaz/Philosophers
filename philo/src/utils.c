@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kroyo-di <kroyo-di@student.42barcelon      +#+  +:+       +#+        */
+/*   By: kroyo-di <kroyo-di@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:39:32 by kroyo-di          #+#    #+#             */
-/*   Updated: 2025/01/23 15:47:49 by kroyo-di         ###   ########.fr       */
+/*   Updated: 2025/01/24 17:31:16 by kroyo-di         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../inc/philosophers.h"
 
 int	ft_isdigit(char c)
 {
