@@ -6,12 +6,13 @@
 /*   By: kroyo-di <kroyo-di@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:38:42 by kroyo-di          #+#    #+#             */
-/*   Updated: 2025/02/24 18:16:50 by kroyo-di         ###   ########.fr       */
+/*   Updated: 2025/03/04 14:01:13 by kroyo-di         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philosophers.h"
 
+// Inicializacion filosofos
 void	init_philos(t_table *table)
 {
 	int	i;
@@ -29,8 +30,10 @@ void	init_philos(t_table *table)
 		table->philos[i].table = table;
 		i++;
 	}
+	table->philos->table = table;
 }
 
+// Inicializacion mesa
 void	init_table(t_table *table, char **av, int ac)
 {
 	int	i;
@@ -44,12 +47,13 @@ void	init_table(t_table *table, char **av, int ac)
 	else
 		table->nmeals = -1;
 	table->start_time = get_time_ms();
-	table->philos = (t_philosopher *)malloc(sizeof(t_philosopher) * table->nphilos);
+	table->philos = (t_philo *)malloc(sizeof(t_philo * table->nphilos));
 	table->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * table->nphilos);
 	if (!table->philos || !table->forks)
 		exit(EXIT_FAILURE);
 	i = 0;
 	while (i < table->nphilos)
 		pthread_mutex_init(&table->forks[i++], NULL);
+	pthread_mutex_init(&table->waiter, NULL);
 	init_philos(table);
 }

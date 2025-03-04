@@ -6,7 +6,7 @@
 /*   By: kroyo-di <kroyo-di@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 22:48:07 by kroyo-di          #+#    #+#             */
-/*   Updated: 2025/02/24 18:16:49 by kroyo-di         ###   ########.fr       */
+/*   Updated: 2025/03/04 14:01:16 by kroyo-di         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_table
 {
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	*waiter;
 	long			nphilos;
 	long			time_to_die;
 	long			time_to_eat;

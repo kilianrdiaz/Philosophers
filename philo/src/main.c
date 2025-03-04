@@ -6,12 +6,13 @@
 /*   By: kroyo-di <kroyo-di@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:57:01 by kroyo-di          #+#    #+#             */
-/*   Updated: 2025/02/24 18:16:51 by kroyo-di         ###   ########.fr       */
+/*   Updated: 2025/03/04 14:01:10 by kroyo-di         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philosophers.h"
 
+// Creacion de hilos (filosofos)
 void    start(t_table *table)
 {
     int i;
@@ -23,6 +24,7 @@ void    start(t_table *table)
     }
 }
 
+// Main
 int main(int ac, char **av)
 {
     t_table table;
