@@ -19,7 +19,7 @@ void	release_forks(t_philo *philo)
 	pthread_mutex_unlock(&philo->r_fork);
 }
 
-// Coger tenedores
+// Coger tenedor
 void	take_forks(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->table->waiter);
