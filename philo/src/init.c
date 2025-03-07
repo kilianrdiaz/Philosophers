@@ -42,6 +42,7 @@ void	init_table(t_table *table, char **av, int ac)
 	table->time_to_die = ft_atol(av[2]);
 	table->time_to_eat = ft_atol(av[3]);
 	table->time_to_sleep = ft_atol(av[4]);
+	table->dead = 0;
 	if (ac == 6)
     	table->nmeals = ft_atol(av[5]);
 	else
@@ -55,5 +56,6 @@ void	init_table(t_table *table, char **av, int ac)
 	while (i < table->nphilos)
 		pthread_mutex_init(&table->forks[i++], NULL);
 	pthread_mutex_init(&table->waiter, NULL);
+	pthread_mutex_init(&table->writing, NULL);
 	init_philos(table);
 }

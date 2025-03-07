@@ -32,15 +32,17 @@ typedef struct s_philo
 
 typedef struct s_table
 {
-	t_philo			*philos;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	*waiter;
+	t_philo			philos[250];
+	pthread_mutex_t	forks[250];
+	pthread_mutex_t	waiter;
+	pthread_mutex_t	writing;
 	long			nphilos;
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
 	long			nmeals;
 	long			start_time;
+	int				dead;
 	
 }			t_table;
 

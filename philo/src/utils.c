@@ -12,6 +12,21 @@
 
 #include "../inc/philosophers.h"
 
+void	print_action(t_philo philo, int id, char *action)
+{
+	long	actual_time;
+
+	pthread_mutex_lock(&philo->table->writing);
+	if (!philo->table->dead)
+	{
+		actual_time = get_time_ms() - philo->table->start_time;
+		printf("%ld ", &actual_time);
+		printf("%d", &philo->id);
+		printf("%s \n", action);
+	}
+	pthread_mutex_unlock(&philo->table->writing);
+}
+
 long	get_time_ms(void)
 {
 	struct timeval	tv;

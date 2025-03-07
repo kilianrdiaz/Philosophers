@@ -19,7 +19,7 @@ void	release_forks(t_philo *philo)
 	pthread_mutex_unlock(&philo->r_fork);
 }
 
-// Coger tenedor
+// Coger tenedores
 void	take_forks(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->table->waiter);
@@ -36,7 +36,7 @@ void	routine(void *arg)
 	t_philo *philo;
 
 	philo = (t_philo *)arg;
-	while (1)
+	while (!philo->table->dead)
 	{
 		printf("");
 		//Eat
