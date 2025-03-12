@@ -20,7 +20,7 @@
 
 typedef struct s_philo
 {
-	/* data */
+	/* data  */
 	int				id;
 	long			time_last_meal;
 	int				meals_eaten;
