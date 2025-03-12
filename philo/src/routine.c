@@ -45,6 +45,5 @@ void	routine(void *arg)
 		usleep(philo->table->time_to_sleep);
 		//Think
 		printf("Thinking...");
-		//Repeat
 	}
 }
