@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kroyo-di <kroyo-di@student.42barcelon      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:57:01 by kroyo-di          #+#    #+#             */
-/*   Updated: 2025/01/23 17:36:13 by kroyo-di         ###   ########.fr       */
+/*   Updated: 2025/03/14 13:52:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int main(int ac, char **av)
 		table.time_to_sleep = ft_atol(av[4]);
 		if (ac == 6)
         	table.nmeals = ft_atol(av[5]);
+        
     }
     else
         print_valid_args();

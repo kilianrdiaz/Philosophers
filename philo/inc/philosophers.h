@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kroyo-di <kroyo-di@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 22:48:07 by kroyo-di          #+#    #+#             */
-/*   Updated: 2025/01/23 17:38:19 by kroyo-di         ###   ########.fr       */
+/*   Updated: 2025/03/14 13:52:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,21 @@
 
 typedef struct s_philosopher
 {
-	/* data */
+	int			id;
+	int			eating;
+	int				meals_eaten;
+	pthread_mutex_t	
 }			t_philosopher;
 
 typedef struct s_table
 {
-	t_philosopher	*philos;
+	t_philosopher	philos[250];
+	pthread_mutex_t	forks[250];
 	long			nphilosophers;
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
 	long			nmeals;
-	
 }			t_table;
 
 void	check_args(int ac, char **av);
