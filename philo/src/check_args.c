@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kroyo-di <kroyo-di@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: kroyo-di <kroyo-di@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:50:21 by kroyo-di          #+#    #+#             */
-/*   Updated: 2025/01/24 17:31:00 by kroyo-di         ###   ########.fr       */
+/*   Updated: 2025/01/23 15:50:24 by kroyo-di         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philosophers.h"
 
+// Muestra los argumentos esperados por el programa
 void	print_valid_args(void)
 {
 	printf("== Wrong Arguments ==\n");
@@ -24,6 +25,7 @@ void	print_valid_args(void)
 	exit(EXIT_SUCCESS);
 }
 
+// Checkea si los argumentos pasados son correctos
 void	check_args(int ac, char **av)
 {
 	int	i;

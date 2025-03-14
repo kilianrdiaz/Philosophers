@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kroyo-di <kroyo-di@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: kroyo-di <kroyo-di@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:39:32 by kroyo-di          #+#    #+#             */
-/*   Updated: 2025/01/24 17:31:16 by kroyo-di         ###   ########.fr       */
+/*   Updated: 2025/03/04 14:01:08 by kroyo-di         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philosophers.h"
+
+void	print_action(t_philo philo, int id, char *action)
+{
+	long	actual_time;
+
+	pthread_mutex_lock(&philo->table->writing);
+	if (!philo->table->dead)
+	{
+		actual_time = get_time_ms() - philo->table->start_time;
+		printf("%ld ", &actual_time);
+		printf("%d", &philo->id);
+		printf("%s \n", action);
+	}
+	pthread_mutex_unlock(&philo->table->writing);
+}
+
+long	get_time_ms(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000L) + (tv.tv_usec / 1000));
+}
 
 int	ft_isdigit(char c)
 {
