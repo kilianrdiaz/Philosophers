@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: your_login <your_login@student.42.fr>      +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/01/01 00:00:00 by your_login       #+#    #+#              #
-#    Updated: 2024/01/01 00:00:00 by your_login      ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 # Colors
 RED		= \033[0;31m
 GREEN	= \033[0;32m
@@ -30,7 +18,7 @@ OBJ_DIR	= obj
 
 # Compiler and flags
 CC		= cc
-CFLAGS	= -Wall -Wextra -Werror -pthread -g -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror -pthread -g -fsanitize=thread
 INCLUDE	= -I$(INC_DIR)
 
 # Source files
@@ -49,12 +37,12 @@ HEADERS	= $(INC_DIR)/philosophers.h
 # Rules
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) Makefile
 	@echo "$(CYAN)Linking $(NAME)...$(RESET)"
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 	@echo "$(GREEN)✓ $(NAME) compiled successfully!$(RESET)"
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS) | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS) Makefile | $(OBJ_DIR)
 	@echo "$(YELLOW)Compiling $<...$(RESET)"
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 

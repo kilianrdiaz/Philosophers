@@ -36,6 +36,9 @@ typedef struct s_table
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	waiter;
+	pthread_mutex_t	write_lock;
+	pthread_t		monitor_thread;
+    int				death_flag;
 	long			nphilos;
 	long			time_to_die;
 	long			time_to_eat;
@@ -47,8 +50,12 @@ typedef struct s_table
 void	check_args(int ac, char **av);
 t_table	*init_table(char **av, int ac);
 void	print_valid_args(void);
+void	print_status(t_philo *philo, char *action);
+void	cleanup_table(t_table *table);
 void	*routine(void *arg);
+void	*monitor(void *arg);
 int		ft_isdigit(char c);
+int		ft_usleep(size_t milliseconds);
 long	get_time_ms(void);
 long	ft_atol(const char *s);
 

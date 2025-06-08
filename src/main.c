@@ -17,12 +17,13 @@ static void    stop(t_table *table)
     int i;
 
     i = 0;
-    while (i < table->nmeals)
+    while (i < table->nphilos)
     {
         pthread_join(table->philos[i].thread, NULL);
         i++;
     }
-    
+    if (table->nphilos > 1)
+        pthread_join(table->monitor_thread, NULL);
 }
 
 // Creacion de hilos (filosofos)
@@ -30,13 +31,24 @@ static int    start(t_table *table)
 {
     int i;
 
+    table->start_time = get_time_ms();
     i = 0;
     while (i < table->nphilos)
     {
-        /* if (pthread_create(&table->philos[++i].thread, NULL, routine, table->philos) != 0)
+        table->philos[i].time_last_meal = table->start_time;
+        i++;
+    }
+    i = 0;
+    while (i < table->nphilos)
+    {
+        if (pthread_create(&table->philos[i].thread, NULL, routine, &table->philos[i]) != 0)
             return (1);
-        printf("test\n"); */
-        pthread_create(&table->philos[i].thread, NULL, routine, table->philos);
+        i++;
+    }
+    if (table->nphilos > 1)
+    {
+        if (pthread_create(&table->monitor_thread, NULL, monitor, table) != 0)
+            return (1);
     }
     return (0);
 }
@@ -55,9 +67,11 @@ int main(int ac, char **av)
             return (EXIT_FAILURE);
         if (start(table) == 1)
             return (EXIT_FAILURE);
+        stop(table);
+        cleanup_table(table);
+        return (EXIT_SUCCESS);
     }
     else
         print_valid_args();
-    stop(table);
     return (EXIT_FAILURE);
 }
