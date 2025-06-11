@@ -26,6 +26,7 @@ SRCS	= $(SRC_DIR)/main.c \
 		  $(SRC_DIR)/init.c \
 		  $(SRC_DIR)/check_args.c \
 		  $(SRC_DIR)/routine.c \
+		  $(SRC_DIR)/monitor.c \
 		  $(SRC_DIR)/utils.c
 
 # Object files

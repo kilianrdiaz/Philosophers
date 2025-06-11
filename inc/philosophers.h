@@ -6,7 +6,7 @@
 /*   By: kroyo-di <kroyo-di@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 22:48:07 by kroyo-di          #+#    #+#             */
-/*   Updated: 2025/06/06 19:56:21 by kroyo-di         ###   ########.fr       */
+/*   Updated: 2025/06/11 21:30:39 by kroyo-di         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	cleanup_table(t_table *table);
 void	*routine(void *arg);
 void	*monitor(void *arg);
 int		ft_isdigit(char c);
+int		should_continue(t_philo *philo);
 int		ft_usleep(size_t milliseconds);
 long	get_time_ms(void);
 long	ft_atol(const char *s);

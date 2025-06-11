@@ -6,7 +6,7 @@
 /*   By: kroyo-di <kroyo-di@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:57:01 by kroyo-di          #+#    #+#             */
-/*   Updated: 2025/06/06 19:58:54 by kroyo-di         ###   ########.fr       */
+/*   Updated: 2025/06/11 21:15:22 by kroyo-di         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void    stop(t_table *table)
         pthread_join(table->monitor_thread, NULL);
 }
 
-// Creacion de hilos (filosofos)
 static int    start(t_table *table)
 {
     int i;
@@ -53,7 +52,6 @@ static int    start(t_table *table)
     return (0);
 }
 
-// Main
 int main(int ac, char **av)
 {
     t_table *table;
