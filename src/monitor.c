@@ -32,6 +32,12 @@ static int check_death(t_table *table)
         {
             pthread_mutex_unlock(&table->waiter);
             print_status(&table->philos[i], "died");
+            /*i = 0;
+            while (i < table->nphilos)
+            {
+                printf("Meals: %d\n", table->philos[i].meals_eaten);
+                i++;
+            }*/
             pthread_mutex_lock(&table->waiter);
             table->death_flag = 1;
             pthread_mutex_unlock(&table->waiter);
@@ -84,7 +90,7 @@ void *monitor(void *arg)
     {
         if (check_death(table) || check_all_ate(table))
             break;
-        ft_usleep(1000);
+        ft_usleep(10);
     }
     return (NULL);
 }
