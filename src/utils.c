@@ -61,7 +61,7 @@ int	ft_usleep(size_t milliseconds)
 
 	start = get_time_ms();
 	while ((get_time_ms() - start) < milliseconds)
-		usleep(500);
+		usleep(50);
 	return (0);
 }
 
@@ -71,7 +71,7 @@ void	print_status(t_philo *philo, char *action)
 
 	pthread_mutex_lock(&philo->table->write_lock);
 	pthread_mutex_lock(&philo->table->waiter);
-    if (philo->table->death_flag)
+    if (philo->table->death_flag && action[0] != 'd')
     {
         pthread_mutex_unlock(&philo->table->waiter);
         pthread_mutex_unlock(&philo->table->write_lock);

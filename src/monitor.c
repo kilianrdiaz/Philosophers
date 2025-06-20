@@ -23,30 +23,27 @@ static int check_death(t_table *table)
     long current_time;
     
     i = 0;
+    current_time = get_time_ms();
     while (i < table->nphilos)
     {
         pthread_mutex_lock(&table->waiter);
-        current_time = get_time_ms();
-        
-        if ((current_time - table->philos[i].time_last_meal) > table->time_to_die)
+        if (table->death_flag)
         {
-            pthread_mutex_unlock(&table->waiter);
-            print_status(&table->philos[i], "died");
-            /*i = 0;
-            while (i < table->nphilos)
-            {
-                printf("Meals: %d\n", table->philos[i].meals_eaten);
-                i++;
-            }*/
-            pthread_mutex_lock(&table->waiter);
-            table->death_flag = 1;
             pthread_mutex_unlock(&table->waiter);
             return (1);
         }
-        pthread_mutex_unlock(&table->waiter);
+        if ((current_time - table->philos[i].time_last_meal) > table->time_to_die)
+        {
+            table->death_flag = 1;
+            pthread_mutex_unlock(&table->waiter);
+            print_status(&table->philos[i], "died");
+            return (1);
+        }
+        else
+            pthread_mutex_unlock(&table->waiter);
         i++;
     }
-    return (0);
+    return (table->death_flag);
 }
 
 // Función para verificar si todos han comido suficiente
@@ -57,6 +54,9 @@ static int check_all_ate(t_table *table)
     
     if (table->nmeals == -1)
         return (0);
+    if (table->death_flag)
+        return (1);
+
     i = 0;
     all_ate = 1;
     while (i < table->nphilos)
@@ -76,19 +76,20 @@ static int check_all_ate(t_table *table)
         pthread_mutex_unlock(&table->waiter);
         return (1);
     }
-    return (0);
+    return (all_ate);
 }
 
 // Monitor principal
 void *monitor(void *arg)
 {
     t_table *table;
-
     table = (t_table *)arg;
 
     while (1)
     {
-        if (check_death(table) || check_all_ate(table))
+        if (check_death(table))
+            break;
+        if (check_all_ate(table))
             break;
         ft_usleep(10);
     }

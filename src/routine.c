@@ -29,13 +29,13 @@ static void	take_forks(t_philo *philo)
 	// Prevención de deadlock: orden según ID del filósofo
 	if (philo->id % 2 == 0)  // Filósofo par
 	{
-		first_fork = philo->r_fork;
-		second_fork = philo->l_fork;
+		first_fork = philo->l_fork;
+		second_fork = philo->r_fork;
 	}
 	else  // Filósofo impar
 	{
-		first_fork = philo->l_fork;
-		second_fork = philo->r_fork;
+		first_fork = philo->r_fork;
+		second_fork = philo->l_fork;
 	}
 
 	// Verificar que los punteros sean válidos antes de hacer lock
@@ -76,7 +76,7 @@ static void	sleep_and_think(t_philo *philo)
 void	*routine(void *arg)
 {
 	t_philo *philo;
-
+	
 	philo = (t_philo *)arg;
 	if (!philo || !philo->table)
 	{
@@ -93,7 +93,7 @@ void	*routine(void *arg)
 		return (NULL);
 	}
 	if (philo->id % 2 == 0)
-		ft_usleep(10);
+		ft_usleep(philo->table->time_to_eat / 2);
 	while (should_continue(philo))
 	{
 		take_forks(philo);
