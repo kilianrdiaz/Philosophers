@@ -6,7 +6,7 @@
 /*   By: kroyo-di <kroyo-di@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 22:48:07 by kroyo-di          #+#    #+#             */
-/*   Updated: 2025/06/11 21:30:39 by kroyo-di         ###   ########.fr       */
+/*   Updated: 2025/06/21 13:45:38 by kroyo-di         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_table
 	pthread_mutex_t	waiter;
 	pthread_mutex_t	write_lock;
 	pthread_t		monitor_thread;
-    int				death_flag;
+	int				death_flag;
 	long			nphilos;
 	long			time_to_die;
 	long			time_to_eat;

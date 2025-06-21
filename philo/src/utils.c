@@ -6,7 +6,7 @@
 /*   By: kroyo-di <kroyo-di@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:39:32 by kroyo-di          #+#    #+#             */
-/*   Updated: 2025/06/11 21:31:18 by kroyo-di         ###   ########.fr       */
+/*   Updated: 2025/06/21 14:36:13 by kroyo-di         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ long	get_time_ms(void)
 
 int	ft_isdigit(char c)
 {
-	if (c >= '0' && c <= '9') 
+	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);
 }
@@ -71,12 +71,12 @@ void	print_status(t_philo *philo, char *action)
 
 	pthread_mutex_lock(&philo->table->write_lock);
 	pthread_mutex_lock(&philo->table->waiter);
-    if (philo->table->death_flag && action[0] != 'd')
-    {
-        pthread_mutex_unlock(&philo->table->waiter);
-        pthread_mutex_unlock(&philo->table->write_lock);
-        return;
-    }
+	if (philo->table->death_flag && action[0] != 'd')
+	{
+		pthread_mutex_unlock(&philo->table->waiter);
+		pthread_mutex_unlock(&philo->table->write_lock);
+		return ;
+	}
 	pthread_mutex_unlock(&philo->table->waiter);
 	timestamp = get_time_ms() - philo->table->start_time;
 	printf("%ld %d %s\n", timestamp, philo->id, action);

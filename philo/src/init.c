@@ -6,13 +6,12 @@
 /*   By: kroyo-di <kroyo-di@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:38:42 by kroyo-di          #+#    #+#             */
-/*   Updated: 2025/06/11 21:08:18 by kroyo-di         ###   ########.fr       */
+/*   Updated: 2025/06/21 15:15:58 by kroyo-di         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-// Función para cleanup en caso de error durante inicialización
 static void	cleanup_partial_table(t_table *table, int forks_initialized)
 {
 	int	i;
@@ -33,15 +32,12 @@ static void	cleanup_partial_table(t_table *table, int forks_initialized)
 	}
 }
 
-// Función para cleanup completo al final del programa
 void	cleanup_table(t_table *table)
 {
 	int	i;
 
 	if (!table)
-		return;
-	
-	// Destruir todos los mutex de los forks
+		return ;
 	if (table->forks)
 	{
 		i = 0;
@@ -52,24 +48,55 @@ void	cleanup_table(t_table *table)
 		}
 		free(table->forks);
 	}
-	
-	// Destruir otros mutex
 	pthread_mutex_destroy(&table->waiter);
 	pthread_mutex_destroy(&table->write_lock);
-	
-	// Liberar arrays y estructura principal
 	if (table->philos)
 		free(table->philos);
 	free(table);
 }
 
-// Inicializacion filosofos
-void	init_philos(t_table *table)
+static int	init_mutex(t_table *table)
 {
 	int	i;
 
 	i = 0;
 	while (i < table->nphilos)
+	{
+		if (pthread_mutex_init(&table->forks[i], NULL) != 0)
+		{
+			cleanup_partial_table(table, i);
+			return (0);
+		}
+		i++;
+	}
+	if (pthread_mutex_init(&(table->waiter), NULL) != 0)
+	{
+		cleanup_partial_table(table, table->nphilos);
+		return (0);
+	}
+	if (pthread_mutex_init(&(table->write_lock), NULL) != 0)
+	{
+		pthread_mutex_destroy(&table->waiter);
+		cleanup_partial_table(table, table->nphilos);
+		return (0);
+	}
+	return (1);
+}
+
+static int	init_philos(t_table *table)
+{
+	int	i;
+
+	table->philos = (t_philo *)malloc(sizeof(t_philo) * table->nphilos);
+	table->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
+			* table->nphilos);
+	if (!table->philos || !table->forks || !init_mutex(table))
+	{
+		cleanup_partial_table(table, 0);
+		return (0);
+	}
+	i = -1;
+	while (++i < table->nphilos)
 	{
 		table->philos[i].id = i + 1;
 		table->philos[i].meals_eaten = 0;
@@ -80,21 +107,17 @@ void	init_philos(t_table *table)
 		else
 			table->philos[i].l_fork = &table->forks[i + 1];
 		table->philos[i].table = table;
-		i++;
 	}
+	return (1);
 }
 
-// Inicializacion mesa
 t_table	*init_table(char **av, int ac)
 {
 	t_table	*table;
-	int		i;
 
 	table = (t_table *)malloc(sizeof(t_table));
 	if (!table)
 		return (NULL);
-		
-	// Inicializar punteros a NULL para cleanup seguro
 	table->philos = NULL;
 	table->forks = NULL;
 	table->death_flag = 0;
@@ -106,42 +129,7 @@ t_table	*init_table(char **av, int ac)
 		table->nmeals = ft_atol(av[5]);
 	else
 		table->nmeals = -1;
-		
-	table->philos = (t_philo *)malloc(sizeof(t_philo) * table->nphilos);
-	table->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * table->nphilos);
-	
-	if (!table->philos || !table->forks)
-	{
-		cleanup_partial_table(table, 0);
+	if (!init_philos(table))
 		return (NULL);
-	}
-	
-	// Inicializar mutex de los forks
-	i = 0;
-	while (i < table->nphilos)
-	{
-		if (pthread_mutex_init(&table->forks[i], NULL) != 0)
-		{
-			cleanup_partial_table(table, i); // Cleanup de los mutex ya inicializados
-			return (NULL);
-		}
-		i++;
-	}
-	
-	// Inicializar otros mutex
-	if (pthread_mutex_init(&(table->waiter), NULL) != 0)
-	{
-		cleanup_partial_table(table, table->nphilos);
-		return (NULL);
-	}
-	
-	if (pthread_mutex_init(&(table->write_lock), NULL) != 0)
-	{
-		pthread_mutex_destroy(&table->waiter);
-		cleanup_partial_table(table, table->nphilos);
-		return (NULL);
-	}
-	
-	init_philos(table);
 	return (table);
 }

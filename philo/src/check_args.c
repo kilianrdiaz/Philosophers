@@ -6,13 +6,12 @@
 /*   By: kroyo-di <kroyo-di@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:50:21 by kroyo-di          #+#    #+#             */
-/*   Updated: 2025/06/06 17:34:17 by kroyo-di         ###   ########.fr       */
+/*   Updated: 2025/06/21 14:58:24 by kroyo-di         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-// Muestra los argumentos esperados por el programa
 void	print_valid_args(void)
 {
 	printf("== Wrong Arguments ==\n");
@@ -25,23 +24,28 @@ void	print_valid_args(void)
 	exit(EXIT_SUCCESS);
 }
 
-// Checkea si los argumentos pasados son correctos
 void	check_args(int ac, char **av)
 {
 	int	i;
 	int	j;
+	int	count;
 
 	i = 1;
+	count = 0;
 	while (i < ac)
 	{
 		j = 0;
 		while (av[i][j])
 		{
-			if (!ft_isdigit(av[i][j]))
+			if (!ft_isdigit(av[i][j]) || av[i][j] == '\0')
 				print_valid_args();
+			if (j == 0)
+				count++;
 			j++;
 		}
 		i++;
 	}
+	if (count + 1 != ac)
+		print_valid_args();
 	return ;
 }
