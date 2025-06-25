@@ -6,7 +6,7 @@
 /*   By: kroyo-di <kroyo-di@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 14:40:38 by kroyo-di          #+#    #+#             */
-/*   Updated: 2025/06/21 15:12:14 by kroyo-di         ###   ########.fr       */
+/*   Updated: 2025/06/25 15:02:35 by kroyo-di         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,12 @@ void	*monitor(void *arg)
 		if (check_death(table))
 			break ;
 		if (check_all_ate(table))
+		{
+			pthread_mutex_lock(&table->write_lock);
+			printf("All philosophers have eaten %ld meals!\n", table->nmeals);
+			pthread_mutex_unlock(&table->write_lock);
 			break ;
+		}
 		ft_usleep(10);
 	}
 	return (NULL);
