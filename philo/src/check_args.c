@@ -6,7 +6,7 @@
 /*   By: kroyo-di <kroyo-di@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:50:21 by kroyo-di          #+#    #+#             */
-/*   Updated: 2025/06/21 14:58:24 by kroyo-di         ###   ########.fr       */
+/*   Updated: 2025/06/25 17:12:13 by kroyo-di         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	print_valid_args(void)
 {
 	printf("== Wrong Arguments ==\n");
 	printf("Expected values:\n./philo\n");
-	printf("->\tnumber_of_philosophers\n");
-	printf("->\ttime_to_die\n");
-	printf("->\ttime_to_eat\n");
-	printf("->\ttime_to_sleep\n");
-	printf("->\tnumber_of_times_each_philosopher_must_eat (*optional*)\n");
+	printf("->\tnumber_of_philosophers > 0\n");
+	printf("->\ttime_to_die > 0\n");
+	printf("->\ttime_to_eat > 0\n");
+	printf("->\ttime_to_sleep > 0\n");
+	printf("->\tnumber_of_times_each_philosopher_must_eat > 0 (*optional*)\n");
 	exit(EXIT_SUCCESS);
 }
 

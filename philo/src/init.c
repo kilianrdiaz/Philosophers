@@ -6,7 +6,7 @@
 /*   By: kroyo-di <kroyo-di@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 17:38:42 by kroyo-di          #+#    #+#             */
-/*   Updated: 2025/06/21 15:15:58 by kroyo-di         ###   ########.fr       */
+/*   Updated: 2025/06/25 17:12:06 by kroyo-di         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,12 @@ t_table	*init_table(char **av, int ac)
 		table->nmeals = ft_atol(av[5]);
 	else
 		table->nmeals = -1;
+	if (table->nphilos == 0 || !table->time_to_die || !table->time_to_eat
+		|| !table->time_to_sleep || !table->nmeals)
+	{
+		free(table);
+		print_valid_args();
+	}
 	if (!init_philos(table))
 		return (NULL);
 	return (table);

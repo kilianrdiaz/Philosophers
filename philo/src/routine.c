@@ -6,7 +6,7 @@
 /*   By: kroyo-di <kroyo-di@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 15:31:22 by kroyo-di          #+#    #+#             */
-/*   Updated: 2025/06/21 15:11:00 by kroyo-di         ###   ########.fr       */
+/*   Updated: 2025/06/25 18:13:28 by kroyo-di         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	release_forks(t_philo *philo)
 {
-	if (philo->l_fork)
-		pthread_mutex_unlock(philo->l_fork);
 	if (philo->r_fork)
 		pthread_mutex_unlock(philo->r_fork);
+	if (philo->l_fork)
+		pthread_mutex_unlock(philo->l_fork);
 }
 
 static void	take_forks(t_philo *philo)
@@ -61,6 +61,7 @@ static void	sleep_and_think(t_philo *philo)
 	print_status(philo, "is sleeping");
 	ft_usleep(philo->table->time_to_sleep);
 	print_status(philo, "is thinking");
+	ft_usleep(5);
 }
 
 void	*routine(void *arg)
