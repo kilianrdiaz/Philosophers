@@ -6,7 +6,7 @@
 /*   By: kroyo-di <kroyo-di@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 14:40:38 by kroyo-di          #+#    #+#             */
-/*   Updated: 2025/06/25 15:02:35 by kroyo-di         ###   ########.fr       */
+/*   Updated: 2025/06/29 16:32:41 by kroyo-di         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@ int	should_continue(t_philo *philo)
 
 	pthread_mutex_lock(&philo->table->waiter);
 	if (philo->table->death_flag)
-		continue_sim = 0;
-	else if (philo->table->nmeals != -1
-		&& philo->meals_eaten >= philo->table->nmeals)
 		continue_sim = 0;
 	else
 		continue_sim = 1;

@@ -18,7 +18,7 @@ OBJ_DIR	= obj
 
 # Compiler and flags
 CC		= cc
-CFLAGS	= -Wall -Wextra -Werror -pthread -g -fsanitize=thread
+CFLAGS	= -Wall -Wextra -Werror -pthread #-g -fsanitize=thread
 INCLUDE	= -I$(INC_DIR)
 
 # Source files
